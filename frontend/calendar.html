@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Appointment Calendar - ClinicHub</title>
+  <meta name="description" content="View your appointments on a calendar">
+  <meta name="keywords" content="calendar, appointments, schedule">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Questrial:wght@400&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- FullCalendar CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <style>
+    .calendar-section {
+      padding-top: 120px;
+      padding-bottom: 60px;
+    }
+
+    .calendar-card {
+      border: none;
+      border-radius: 1rem;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+      padding: 1.5rem;
+      background: white;
+    }
+
+    .calendar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .calendar-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #012970;
+      margin: 0;
+    }
+
+    .calendar-legend {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+    }
+
+    .legend-color {
+      width: 16px;
+      height: 16px;
+      border-radius: 4px;
+    }
+
+    #calendar {
+      background: white;
+    }
+
+    .fc-event {
+      cursor: pointer;
+      border-radius: 4px;
+      padding: 2px 4px;
+    }
+
+    .fc-daygrid-event {
+      white-space: normal;
+    }
+
+    .appointment-modal .modal-body {
+      padding: 1.5rem;
+    }
+
+    .appointment-detail {
+      margin-bottom: 1rem;
+    }
+
+    .appointment-detail label {
+      font-weight: 600;
+      color: #012970;
+      font-size: 0.875rem;
+      margin-bottom: 0.25rem;
+      display: block;
+    }
+
+    .appointment-detail p {
+      margin: 0;
+      color: #495057;
+    }
+  </style>
+</head>
+
+<body class="index-page">
+
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+
+      <a href="index.html" class="logo d-flex align-items-center">
+        <h1 class="sitename">ClinicHub</h1>
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul id="nav-items">
+          <!-- Navigation will be filled by header.js -->
+          <!-- Will be filled by JavaScript -->
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+
+    </div>
+  </header>
+
+  <main class="main">
+    <section class="section calendar-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="calendar-card">
+              <div class="calendar-header">
+                <h2 class="calendar-title">
+                  <i class="bi bi-calendar3 me-2"></i>My Appointments Calendar
+                </h2>
+                <div>
+                  <a href="Booking Appointments.html" class="btn btn-primary">
+                    <i class="bi bi-plus-circle me-1"></i>Book New Appointment
+                  </a>
+                </div>
+              </div>
+
+              <div id="calendar"></div>
+
+              <div class="calendar-legend mt-3">
+                <div class="legend-item">
+                  <div class="legend-color" style="background-color: #3788d8;"></div>
+                  <span>Pending</span>
+                </div>
+                <div class="legend-item">
+                  <div class="legend-color" style="background-color: #28a745;"></div>
+                  <span>Confirmed</span>
+                </div>
+                <div class="legend-item">
+                  <div class="legend-color" style="background-color: #dc3545;"></div>
+                  <span>Cancelled</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Appointments List Below Calendar -->
+        <div class="row mt-4">
+          <div class="col-12">
+            <div class="calendar-card">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h4 class="mb-0">All Appointments</h4>
+              </div>
+              <div class="table-responsive">
+                <table class="table table-sm align-middle mb-0">
+                  <thead class="table-light">
+                    <tr>
+                      <th>Date</th>
+                      <th>Clinic</th>
+                      <th>Department</th>
+                      <th>Status</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="appointments-list-body">
+                    <tr>
+                      <td colspan="5" class="text-center text-muted py-3">Loading appointments...</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Appointment Detail Modal -->
+  <div class="modal fade appointment-modal" id="appointmentModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">
+            <i class="bi bi-calendar-check me-2"></i>Appointment Details
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body" id="appointment-details">
+          <p class="text-muted">Loading...</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-primary me-auto" id="reschedule-appointment-btn" style="display: none;">
+            <i class="bi bi-arrow-repeat me-1"></i>Reschedule
+          </button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-danger" id="cancel-appointment-btn" style="display: none;">
+            <i class="bi bi-x-circle me-1"></i>Cancel Appointment
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer id="footer" class="footer position-relative light-background">
+    <div class="footer-bottom">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-6">
+            <div class="copyright">
+              <p>© <span>2025</span> <strong class="px-1 sitename">ClinicHub</strong> <span>Zainab Salim Al-Nahdi</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+
+  <!-- FullCalendar JS -->
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js"></script>
+
+  <!-- Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+  <!-- Header Navigation -->
+  <script type="module">
+    import { initHeader } from './assets/js/header.js';
+    initHeader();
+  </script>
+
+  <!-- Calendar Logic -->
+  <script type="module">
+    import { authAPI, appointmentsAPI } from './assets/js/api.js';
+
+    // Calendar state (must be declared before use to avoid TDZ errors)
+    let calendar;
+    let appointments = [];
+    let currentAppointmentId = null;
+
+    const user = authAPI.getCurrentUserFromStorage();
+
+    // Protect page
+    if (!user || !authAPI.isLoggedIn()) {
+      window.location.href = 'login.html';
+    } else {
+      initializeCalendar();
+    }
+
+    function initializeCalendar() {
+      const calendarEl = document.getElementById('calendar');
+      
+      calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        headerToolbar: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+        },
+        height: 'auto',
+        navLinks: true,
+        dayMaxEvents: true,
+        editable: false,
+        selectable: false,
+        eventClick: function(info) {
+          showAppointmentDetails(info.event.extendedProps.appointment);
+        },
+        eventDidMount: function(info) {
+          // Add tooltip
+          info.el.setAttribute('title', info.event.title);
+        }
+      });
+
+      calendar.render();
+      loadAppointments();
+    }
+
+    async function loadAppointments() {
+      try {
+        const response = await appointmentsAPI.getAll();
+        
+        if (response.success && response.appointments) {
+          appointments = response.appointments;
+
+          // Build calendar events
+          const events = appointments.map(apt => {
+            const date = new Date(apt.date);
+            const status = apt.status || 'pending';
+            
+            // Color based on status
+            let color = '#3788d8'; // default blue for pending
+            if (status === 'confirmed') {
+              color = '#28a745'; // green
+            } else if (status === 'cancelled') {
+              color = '#dc3545'; // red
+            }
+
+            return {
+              id: apt.id,
+              title: `${apt.clinic} - ${apt.department}`,
+              start: date.toISOString().split('T')[0],
+              color: color,
+              extendedProps: {
+                appointment: apt
+              }
+            };
+          });
+
+          calendar.removeAllEvents();
+          calendar.addEventSource(events);
+
+          // Build list under calendar
+          const listBody = document.getElementById('appointments-list-body');
+          listBody.innerHTML = '';
+
+          if (!appointments.length) {
+            listBody.innerHTML = '<tr><td colspan="5" class="text-center text-muted py-3">No appointments found.</td></tr>';
+          } else {
+            appointments.forEach(apt => {
+              const tr = document.createElement('tr');
+              const date = apt.date ? new Date(apt.date).toLocaleDateString() : '-';
+              const status = (apt.status || 'pending');
+              const statusLabel = status.charAt(0).toUpperCase() + status.slice(1);
+
+              let badgeClass = 'bg-warning-subtle text-warning';
+              if (status === 'confirmed') badgeClass = 'bg-success-subtle text-success';
+              else if (status === 'cancelled') badgeClass = 'bg-danger-subtle text-danger';
+
+              const canModify = status === 'pending' || status === 'confirmed';
+
+              tr.innerHTML = `
+                <td>${date}</td>
+                <td>${apt.clinic || '-'}</td>
+                <td>${apt.department || '-'}</td>
+                <td><span class="badge ${badgeClass}">${statusLabel}</span></td>
+                <td>
+                  ${canModify ? `
+                    <button class="btn btn-sm btn-outline-primary me-1" data-action="reschedule" data-id="${apt.id}">
+                      <i class="bi bi-arrow-repeat"></i> Reschedule
+                    </button>
+                    <button class="btn btn-sm btn-outline-danger" data-action="cancel" data-id="${apt.id}">
+                      <i class="bi bi-x-circle"></i> Cancel
+                    </button>
+                  ` : '<span class="text-muted small">No actions</span>'}
+                </td>
+              `;
+              listBody.appendChild(tr);
+            });
+          }
+        }
+      } catch (error) {
+        console.error('Error loading appointments:', error);
+        alert('Failed to load appointments. Please try again.');
+      }
+    }
+
+    function showAppointmentDetails(appointment) {
+      currentAppointmentId = appointment.id;
+      const modal = new bootstrap.Modal(document.getElementById('appointmentModal'));
+      const detailsEl = document.getElementById('appointment-details');
+      const cancelBtn = document.getElementById('cancel-appointment-btn');
+      const rescheduleBtn = document.getElementById('reschedule-appointment-btn');
+
+      // Format date
+      const date = new Date(appointment.date);
+      const formattedDate = date.toLocaleDateString('en-US', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+
+      // Show/hide cancel & reschedule buttons based on status
+      if (appointment.status === 'pending' || appointment.status === 'confirmed') {
+        cancelBtn.style.display = 'inline-block';
+        rescheduleBtn.style.display = 'inline-block';
+      } else {
+        cancelBtn.style.display = 'none';
+        rescheduleBtn.style.display = 'none';
+      }
+
+      // Status badge
+      const statusClass = appointment.status === 'confirmed' ? 'bg-success' : 
+                         appointment.status === 'cancelled' ? 'bg-danger' : 
+                         'bg-warning';
+      const statusText = appointment.status ? appointment.status.charAt(0).toUpperCase() + appointment.status.slice(1) : 'Pending';
+
+      detailsEl.innerHTML = `
+        <div class="appointment-detail">
+          <label>Status</label>
+          <p><span class="badge ${statusClass}">${statusText}</span></p>
+        </div>
+        <div class="appointment-detail">
+          <label>Clinic</label>
+          <p>${appointment.clinic || '-'}</p>
+        </div>
+        <div class="appointment-detail">
+          <label>Department</label>
+          <p>${appointment.department || '-'}</p>
+        </div>
+        <div class="appointment-detail">
+          <label>Date</label>
+          <p>${formattedDate}</p>
+        </div>
+        <div class="appointment-detail">
+          <label>Patient Name</label>
+          <p>${appointment.name || '-'}</p>
+        </div>
+        <div class="appointment-detail">
+          <label>Email</label>
+          <p>${appointment.email || '-'}</p>
+        </div>
+        <div class="appointment-detail">
+          <label>Phone</label>
+          <p>${appointment.phone || '-'}</p>
+        </div>
+        <div class="appointment-detail">
+          <label>Area</label>
+          <p>${appointment.area || '-'}</p>
+        </div>
+        ${appointment.message ? `
+        <div class="appointment-detail">
+          <label>Message</label>
+          <p>${appointment.message}</p>
+        </div>
+        ` : ''}
+      `;
+
+      modal.show();
+    }
+
+    // Helper to cancel an appointment (used by modal and list actions)
+    async function cancelAppointment(appointmentId) {
+      if (!appointmentId) return;
+
+      if (!confirm('Are you sure you want to cancel this appointment?')) {
+        return;
+      }
+
+      try {
+        await appointmentsAPI.cancel(appointmentId);
+        alert('Appointment cancelled successfully!');
+
+        // Close modal if open
+        const modalEl = document.getElementById('appointmentModal');
+        const modal = bootstrap.Modal.getInstance(modalEl);
+        if (modal) {
+          modal.hide();
+        }
+
+        // Reload calendar & list
+        loadAppointments();
+      } catch (error) {
+        alert(error.message || 'Failed to cancel appointment.');
+      }
+    }
+
+    // Helper to reschedule an appointment (auto-confirms)
+    async function rescheduleAppointment(appointmentId) {
+      if (!appointmentId) return;
+
+      const appointment = appointments.find(a => a.id === appointmentId);
+      if (!appointment) return;
+
+      const currentDate = new Date(appointment.date);
+      const currentDateStr = currentDate.toISOString().split('T')[0];
+
+      const newDate = prompt('Select a new date for this appointment (YYYY-MM-DD):', currentDateStr);
+      if (!newDate) {
+        return; // user cancelled
+      }
+
+      try {
+        const response = await fetch(`/api/appointments/${appointmentId}/reschedule`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+          },
+          body: JSON.stringify({ date: newDate })
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+          alert('Appointment rescheduled and confirmed successfully!');
+
+          // Close modal if open
+          const modalEl = document.getElementById('appointmentModal');
+          const modal = bootstrap.Modal.getInstance(modalEl);
+          if (modal) {
+            modal.hide();
+          }
+
+          // Reload calendar & list
+          loadAppointments();
+        } else {
+          alert(data.message || 'Failed to reschedule appointment.');
+        }
+      } catch (error) {
+        console.error('Error rescheduling appointment:', error);
+        alert('Failed to reschedule appointment. Please try again.');
+      }
+    }
+
+    // Cancel appointment handler (from modal)
+    document.getElementById('cancel-appointment-btn').addEventListener('click', async function() {
+      if (!currentAppointmentId) return;
+      cancelAppointment(currentAppointmentId);
+    });
+
+    // Reschedule appointment handler (from modal)
+    document.getElementById('reschedule-appointment-btn').addEventListener('click', async function() {
+      if (!currentAppointmentId) return;
+      rescheduleAppointment(currentAppointmentId);
+    });
+
+    // List actions: reschedule / cancel buttons in All Appointments table
+    document.addEventListener('click', function(e) {
+      const btn = e.target.closest('button[data-action][data-id]');
+      if (!btn) return;
+
+      const id = parseInt(btn.getAttribute('data-id'), 10);
+      const action = btn.getAttribute('data-action');
+
+      if (action === 'cancel') {
+        cancelAppointment(id);
+      } else if (action === 'reschedule') {
+        rescheduleAppointment(id);
+      }
+    });
+  </script>
+
+</body>
+
+</html>
+

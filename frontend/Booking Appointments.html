@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Appointment - ClinicHub</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- AOS & Font Awesome via CDN (since local files are not present) -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: Clinic
+  * Template URL: https://bootstrapmade.com/clinic-bootstrap-template/
+  * Updated: Jul 23 2025 with Bootstrap v5.3.7
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body class="appointment-page">
+
+  <header id="header" class="header fixed-top">
+
+    <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+
+      <a href="index.html" class="logo d-flex align-items-center">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="assets/img/logo.webp" alt=""> -->
+        <h1 class="sitename">ClinicHub</h1>
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul id="nav-items">
+          <!-- Navigation will be filled by header.js -->
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+
+    </div>
+  </header>
+  </header>
+
+  <main class="main">
+
+    
+    <!-- Page Title -->
+    <div class="page-title light-background">
+      <div class="container">
+        <h1>Booking Appointments</h1>
+        <nav class="breadcrumbs">
+          <ol>
+            <li><a href="index.html">Home</a></li>
+          </ol>
+        </nav>
+      </div>
+    </div><!-- End Page Title -->
+  
+
+    <!-- Appointmnet Section -->
+    <section id="appointmnet" class="appointmnet section">
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row">
+          <div class="col-lg-8 mx-auto">
+            <div class="booking-wrapper">
+              <div class="booking-header text-center" data-aos="fade-up" data-aos-delay="200">
+                <h2>Book your appointment</h2>
+                <p>Book your medical appointment in just a few simple steps. Our clinics specialize in all fields and are highly experienced, ready to provide you with the best possible care.</p>
+              </div>
+
+              <div class="booking-steps" data-aos="fade-up" data-aos-delay="300">
+                <div class="step">
+                  <div class="step-icon">
+                    <i class="bi bi-calendar-check"></i>
+                  </div>
+                  <div class="step-content">
+                    <h4>Select Service</h4>
+                    <p>Choose the medical service you need</p>
+                  </div>
+                </div>
+                <div class="step">
+                  <div class="step-icon">
+                    <i class="bi bi-clock"></i>
+                  </div>
+                  <div class="step-content">
+                    <h4>Pick Date &amp; Time</h4>
+                    <p>Select your preferred appointment slot</p>
+                  </div>
+                </div>
+                <div class="step">
+                  <div class="step-icon">
+                    <i class="bi bi-person-check"></i>
+                  </div>
+                  <div class="step-content">
+                    <h4>Confirm Details</h4>
+                    <p>Provide your information and confirm</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="appointment-form" data-aos="fade-up" data-aos-delay="400">
+              <form id="appointmentForm">
+                  <div class="row gy-4">
+                    <div class="col-md-6">
+                      <input type="text" name="name" class="form-control" placeholder="Full Name" required="">
+                    </div>
+                    <div class="col-md-6">
+                      <input type="email" name="email" class="form-control" placeholder="Email Address" required="">
+                    </div>
+                    <div class="col-md-6">
+                      <input type="tel" name="phone" class="form-control" placeholder="Phone Number" required="">
+                    </div>
+                    <div class="col-md-6">
+                     <select name="area" class="form-select" required>
+                     <option value="">Select Your Area</option>
+                     <option value="muscat">Muscat</option>
+                     <option value="seeb">Seeb</option>
+                     <option value="muttrah">Muttrah</option>
+                     <option value="al-khoud">Al Khoud</option>
+                     <option value="al-mawalah">Al Mawaleh</option>
+                     <option value="bawshar">Bawshar</option>
+                     <option value="mabela">Mabela</option>
+                     <option value="as-seeb">As Seeb</option>
+                     <option value="amerat">Al Amerat</option>
+                     <option value="qurum">Qurum</option>
+                     <option value="ruwi">Ruwi</option>
+                     </select>
+                    </div>
+                    
+                    <div class="col-md-6">
+                      <select name="clinic" id="clinic-select" class="form-select" required="">
+                        <option value="">Loading clinics...</option>
+                      </select>
+                    </div>
+                    <div class="col-md-6">
+                      <input type="date" name="date" class="form-control" required="">
+                    </div>
+                    <div class="col-md-6">
+                      <select name="department" class="form-select" required="">
+                        <option value="">Select Department</option>
+                        <option value="general">General Practitioner</option>
+                        <option value="pediatrics">Pediatrics</option>
+                        <option value="dermatology">Dermatology</option>
+                        <option value="dentistry">Dentistry</option>
+                        <option value="gynecology">Obstetrics & Gynecology</option>
+                        <option value="cardiology">Cardiology</option>
+                        <option value="orthopedics">Orthopedics</option>
+                        <option value="ent">ENT (Ear, Nose & Throat)</option>
+                        <option value="neurology">Neurology</option>
+                        <option value="ophthalmology">Ophthalmology</option>
+                        <option value="psychiatry">Psychiatry</option>
+                        <option value="physiotherapy">Physiotherapy</option>
+                        <option value="nutrition">Nutrition</option>
+                        <option value="emergency">Emergency Care</option>
+                        <option value="radiology">Radiology</option>
+                        <option value="cosmetic">Cosmetic Medicine</option>
+                        
+                      </select>
+                    </div>
+                    <div class="col-12">
+                      <textarea name="message" class="form-control" rows="4" placeholder="Additional notes or symptoms (optional)"></textarea>
+                    </div>
+                    <div class="col-12">
+                      <div class="loading">Loading</div>
+                      <div class="error-message"></div>
+                      <div class="sent-message">Your appointment has been scheduled. Thank you!</div>
+                      <button type="submit" class="btn-book">Book Appointment Now</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </section><!-- /Appointmnet Section -->
+
+  </main>
+
+  <div id="rating-popup" class="rating-popup">
+  <div class="rating-box">
+    <h3>Rate Your Experience</h3>
+    <div class="stars">
+      <span data-value="1">★</span>
+      <span data-value="2">★</span>
+      <span data-value="3">★</span>
+      <span data-value="4">★</span>
+      <span data-value="5">★</span>
+    </div>
+    <button id="submit-rating">Submit Rating</button>
+  </div>
+</div>
+
+  
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+  <!-- AOS via CDN (since local file is not present) -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    // Initialize AOS animations for this page
+    AOS.init({
+      duration: 800,
+      once: true
+    });
+  </script>
+
+  <!-- Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+  <!-- Header Navigation -->
+  <script type="module">
+    import { initHeader } from './assets/js/header.js';
+    initHeader();
+  </script>
+
+  <!-- Appointment Booking API Script -->
+  <script type="module">
+    import { appointmentsAPI, authAPI, clinicsAPI } from './assets/js/api.js';
+
+    // Check if user is logged in (but don't force redirect, just warn in console)
+    const user = authAPI.getCurrentUserFromStorage();
+    if (!user || !authAPI.isLoggedIn()) {
+      console.warn('User is not logged in. Booking will still work only if backend allows unauthenticated appointments.');
+    }
+
+    // Load clinics and pre-fill form
+    async function initializeBookingForm() {
+      const clinicSelect = document.getElementById('clinic-select');
+      const nameInput = document.querySelector('[name="name"]');
+      const emailInput = document.querySelector('[name="email"]');
+      const phoneInput = document.querySelector('[name="phone"]');
+
+      // Pre-fill user info if logged in
+      if (user) {
+        if (nameInput) nameInput.value = user.name || '';
+        if (emailInput) emailInput.value = user.email || '';
+        if (phoneInput && user.phone) phoneInput.value = user.phone || '';
+      }
+
+      // Load clinics from API
+      try {
+        const response = await clinicsAPI.getAll();
+        const clinics = response.clinics || response || [];
+        const activeClinics = clinics.filter(c => c.is_active !== 0);
+
+        // Populate clinic dropdown
+        clinicSelect.innerHTML = '<option value="">Select Clinic</option>';
+        activeClinics.forEach(clinic => {
+          const option = document.createElement('option');
+          option.value = clinic.name;
+          option.textContent = clinic.name;
+          clinicSelect.appendChild(option);
+        });
+
+        // Pre-fill clinic from URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const clinicParam = urlParams.get('clinic');
+        if (clinicParam) {
+          const decodedClinic = decodeURIComponent(clinicParam);
+          clinicSelect.value = decodedClinic;
+          
+          // If clinic not found in dropdown, add it
+          if (!clinicSelect.value && decodedClinic) {
+            const option = document.createElement('option');
+            option.value = decodedClinic;
+            option.textContent = decodedClinic;
+            option.selected = true;
+            clinicSelect.insertBefore(option, clinicSelect.firstChild.nextSibling);
+          }
+        }
+      } catch (error) {
+        console.error('Error loading clinics:', error);
+        clinicSelect.innerHTML = '<option value="">Error loading clinics</option>';
+      }
+    }
+
+    // Initialize form when page loads
+    initializeBookingForm();
+
+    document.getElementById("appointmentForm").addEventListener("submit", async function (event) {
+      event.preventDefault();
+
+      const form = event.target;
+      const loadingDiv = form.querySelector('.loading');
+      const errorDiv = form.querySelector('.error-message');
+      const successDiv = form.querySelector('.sent-message');
+      const submitBtn = form.querySelector('button[type="submit"]');
+
+      // Hide previous messages
+      loadingDiv.style.display = 'block';
+      errorDiv.style.display = 'none';
+      successDiv.style.display = 'none';
+      submitBtn.disabled = true;
+
+      // Get form data
+      const formData = {
+        name: form.querySelector('[name="name"]').value.trim(),
+        email: form.querySelector('[name="email"]').value.trim(),
+        phone: form.querySelector('[name="phone"]').value.trim(),
+        area: form.querySelector('[name="area"]').value,
+        clinic: form.querySelector('[name="clinic"]').value,
+        department: form.querySelector('[name="department"]').value,
+        date: form.querySelector('[name="date"]').value,
+        message: form.querySelector('[name="message"]').value.trim() || '',
+      };
+
+      try {
+        const response = await appointmentsAPI.create(formData);
+        
+        loadingDiv.style.display = 'none';
+        successDiv.style.display = 'block';
+        form.reset();
+        
+        setTimeout(() => {
+          successDiv.style.display = 'none';
+        }, 5000);
+      } catch (error) {
+        loadingDiv.style.display = 'none';
+        errorDiv.textContent = error.message || 'Failed to book appointment. Please try again.';
+        errorDiv.style.display = 'block';
+      } finally {
+        submitBtn.disabled = false;
+      }
+    });
+  </script>
+
+</body>
+
+</html>

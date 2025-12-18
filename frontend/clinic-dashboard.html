@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Clinic Dashboard - ClinicHub</title>
+  <meta name="description" content="Clinic dashboard for managing appointments">
+  <meta name="keywords" content="clinic, dashboard, appointments">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <style>
+    body.clinic-page {
+      background: #f5f6ff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .clinic-main {
+      padding-top: 100px;
+      padding-bottom: 40px;
+      flex: 1;
+    }
+
+    .clinic-card {
+      border-radius: 1rem;
+      border: none;
+      box-shadow: 0 18px 40px rgba(1, 41, 112, 0.08);
+      background: #ffffff;
+    }
+
+    .stat-pill {
+      border-radius: 999px;
+      padding: 0.6rem 1rem;
+      background: #f2f4ff;
+      font-size: 0.85rem;
+    }
+
+    .table-sm th,
+    .table-sm td {
+      font-size: 0.85rem;
+    }
+
+    .status-badge {
+      font-size: 0.75rem;
+      padding: 0.35rem 0.75rem;
+      border-radius: 0.5rem;
+    }
+  </style>
+</head>
+
+<body class="clinic-page">
+
+  <!-- Header -->
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+
+      <a href="index.html" class="logo d-flex align-items-center">
+        <h1 class="sitename">ClinicHub</h1>
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul id="nav-items">
+          <!-- Navigation will be filled by header.js -->
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+
+    </div>
+  </header>
+
+  <main class="main clinic-main">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+          <h2 class="mb-1">Clinic Dashboard</h2>
+          <p class="text-muted mb-0" id="clinic-name">Loading clinic information...</p>
+        </div>
+        <span class="stat-pill d-inline-flex align-items-center gap-2">
+          <i class="fa-solid fa-hospital text-primary"></i>
+          <span id="clinic-identity">Loading...</span>
+        </span>
+      </div>
+
+      <!-- Stats -->
+      <div class="row g-3 mb-4" id="stats-row">
+        <div class="col-md-3">
+          <div class="card clinic-card p-3">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <p class="text-muted mb-1">Total Appointments</p>
+                <h4 id="stat-total" class="mb-0">-</h4>
+              </div>
+              <span class="badge bg-primary-subtle text-primary rounded-circle p-3">
+                <i class="fa-solid fa-calendar-check"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="card clinic-card p-3">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <p class="text-muted mb-1">Pending</p>
+                <h4 id="stat-pending" class="mb-0">-</h4>
+              </div>
+              <span class="badge bg-warning-subtle text-warning rounded-circle p-3">
+                <i class="fa-solid fa-clock"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="card clinic-card p-3">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <p class="text-muted mb-1">Confirmed</p>
+                <h4 id="stat-confirmed" class="mb-0">-</h4>
+              </div>
+              <span class="badge bg-success-subtle text-success rounded-circle p-3">
+                <i class="fa-solid fa-check-circle"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="card clinic-card p-3">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <p class="text-muted mb-1">Cancelled</p>
+                <h4 id="stat-cancelled" class="mb-0">-</h4>
+              </div>
+              <span class="badge bg-danger-subtle text-danger rounded-circle p-3">
+                <i class="fa-solid fa-times-circle"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Appointments Table -->
+      <div class="row g-3">
+        <div class="col-12">
+          <div class="card clinic-card">
+            <div class="card-header bg-white border-0 d-flex justify-content-between align-items-center">
+              <h5 class="mb-0">Appointments</h5>
+              <button class="btn btn-sm btn-outline-primary" onclick="loadAppointments()">
+                <i class="bi bi-arrow-clockwise me-1"></i>Refresh
+              </button>
+            </div>
+            <div class="card-body p-0">
+              <div class="table-responsive">
+                <table class="table table-sm mb-0 align-middle">
+                  <thead class="table-light">
+                    <tr>
+                      <th>Patient Name</th>
+                      <th>Email</th>
+                      <th>Phone</th>
+                      <th>Department</th>
+                      <th>Date</th>
+                      <th>Status</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="appointments-body">
+                    <tr>
+                      <td colspan="7" class="text-center text-muted py-3">Loading appointments...</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+
+  <!-- Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+  <!-- Header Navigation -->
+  <script type="module">
+    import { initHeader } from './assets/js/header.js';
+    initHeader();
+  </script>
+
+  <!-- Clinic Dashboard Logic -->
+  <script type="module">
+    import { authAPI } from './assets/js/api.js';
+
+    const user = authAPI.getCurrentUserFromStorage();
+    const clinicIdentity = document.getElementById('clinic-identity');
+    // Protect page: only allow clinic users
+    if (!user || !authAPI.isLoggedIn() || user.role !== 'clinic') {
+      alert('You must be a clinic user to access this page.');
+      window.location.href = 'login.html';
+    } else {
+      clinicIdentity.textContent = `${user.name} (${user.email})`;
+      loadClinicData();
+    }
+
+    async function loadClinicData() {
+      try {
+        // Load stats
+        const statsRes = await fetch(`/api/clinic/stats`, {
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+          }
+        });
+        const statsData = await statsRes.json();
+        
+        if (statsRes.ok && statsData.success) {
+          const s = statsData.stats;
+          document.getElementById('stat-total').textContent = s.totalAppointments ?? '-';
+          document.getElementById('stat-pending').textContent = s.pendingAppointments ?? '-';
+          document.getElementById('stat-confirmed').textContent = s.confirmedAppointments ?? '-';
+          document.getElementById('stat-cancelled').textContent = s.cancelledAppointments ?? '-';
+          
+          if (statsData.clinic) {
+            document.getElementById('clinic-name').textContent = `${statsData.clinic.name} - ${statsData.clinic.category}`;
+          }
+        }
+
+        // Load appointments
+        await loadAppointments();
+      } catch (error) {
+        console.error('Error loading clinic data:', error);
+        alert('Failed to load clinic data. Please try again.');
+      }
+    }
+
+    async function loadAppointments() {
+      try {
+        const appointmentsRes = await fetch(`/api/clinic/appointments`, {
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+          }
+        });
+        const appointmentsData = await appointmentsRes.json();
+        const appointmentsBody = document.getElementById('appointments-body');
+        appointmentsBody.innerHTML = '';
+
+        if (appointmentsRes.ok && appointmentsData.success && appointmentsData.appointments.length) {
+          appointmentsData.appointments.forEach(apt => {
+            const tr = document.createElement('tr');
+            const statusClass = apt.status === 'confirmed' ? 'bg-success-subtle text-success' : 
+                               apt.status === 'cancelled' ? 'bg-danger-subtle text-danger' : 
+                               apt.status === 'completed' ? 'bg-info-subtle text-info' :
+                               'bg-warning-subtle text-warning';
+            
+            const date = apt.date ? new Date(apt.date).toLocaleDateString() : '-';
+            
+            tr.innerHTML = `
+              <td>${apt.name || '-'}</td>
+              <td>${apt.email || '-'}</td>
+              <td>${apt.phone || '-'}</td>
+              <td>${apt.department || '-'}</td>
+              <td>${date}</td>
+              <td><span class="badge status-badge ${statusClass}">${apt.status || 'pending'}</span></td>
+              <td>
+                ${apt.status === 'pending' ? `
+                  <button class="btn btn-sm btn-success me-1" onclick="updateStatus(${apt.id}, 'confirmed')">
+                    <i class="bi bi-check-circle"></i> Confirm
+                  </button>
+                ` : ''}
+                ${apt.status !== 'cancelled' && apt.status !== 'completed' ? `
+                  <button class="btn btn-sm btn-danger" onclick="updateStatus(${apt.id}, 'cancelled')">
+                    <i class="bi bi-x-circle"></i> Cancel
+                  </button>
+                ` : ''}
+                ${apt.status === 'confirmed' ? `
+                  <button class="btn btn-sm btn-info" onclick="updateStatus(${apt.id}, 'completed')">
+                    <i class="bi bi-check2-all"></i> Complete
+                  </button>
+                ` : ''}
+              </td>
+            `;
+            appointmentsBody.appendChild(tr);
+          });
+        } else {
+          appointmentsBody.innerHTML = '<tr><td colspan="7" class="text-center text-muted py-3">No appointments found.</td></tr>';
+        }
+      } catch (error) {
+        console.error('Error loading appointments:', error);
+        document.getElementById('appointments-body').innerHTML = 
+          '<tr><td colspan="7" class="text-center text-danger py-3">Failed to load appointments</td></tr>';
+      }
+    }
+
+    window.updateStatus = async function(appointmentId, newStatus) {
+      const statusText = newStatus === 'confirmed' ? 'confirm' : 
+                        newStatus === 'cancelled' ? 'cancel' : 
+                        'mark as completed';
+      
+      if (!confirm(`Are you sure you want to ${statusText} this appointment?`)) {
+        return;
+      }
+
+      try {
+        const response = await fetch(`/api/clinic/appointments/${appointmentId}/status`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+          },
+          body: JSON.stringify({ status: newStatus })
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+          alert(`Appointment ${statusText}ed successfully!`);
+          loadClinicData(); // Reload stats and appointments
+        } else {
+          alert(data.message || 'Failed to update appointment status.');
+        }
+      } catch (error) {
+        console.error('Error updating status:', error);
+        alert('Failed to update appointment status. Please try again.');
+      }
+    };
+  </script>
+
+</body>
+
+</html>
+

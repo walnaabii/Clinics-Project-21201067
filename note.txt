@@ -1,0 +1,64 @@
+   cd backend
+      npm install
+
+         npm run dev
+
+
+
+         Log in as the admin user:
+Email: admin@clinichub.com
+Password: admin123
+
+
+✅ SQLite database connected
+🚀 Server running on http://localhost:3000
+📝 API available at http://localhost:3000/api
+
+
+
+0 users with Omani names have been added to the database:
+Ahmed Al-Mazroui - ahmed.almazroui@example.com
+Fatima Al-Said - fatima.alsaid@example.com
+Mohammed Al-Hinai - mohammed.alhinai@example.com
+Aisha Al-Balushi - aisha.albalushi@example.com
+Salem Al-Kharusi - salem.alkharusi@example.com
+Maryam Al-Rashidi - maryam.alrashidi@example.com
+Khalid Al-Zadjali - khalid.alzadjali@example.com
+Noor Al-Maamari - noor.almaamari@example.com
+Hamad Al-Shukaili - hamad.alshukaili@example.com
+Layla Al-Abri - layla.alabri@example.com
+
+
+Password for all users: user123
+
+
+Arak Medical Clinic
+Email: arak.medical.clinic@clinic.local
+Password: Clinic123!
+German Eye Centre
+Email: german.eye.centre@clinic.local
+Password: Clinic123!
+Islam Dental Clinic
+Email: islam.dental.clinic@clinic.local
+Password: Clinic123!
+Muscat Eye Laser Center
+Email: muscat.eye.laser.center@clinic.local
+Password: Clinic123!
+Al Nahda Hospital
+Email: al.nahda.hospital@clinic.local
+Password: Clinic123!
+Modern Dental Care
+Email: modern.dental.care@clinic.local
+Password: Clinic123!
+Oman Medical Center
+Email: oman.medical.center@clinic.local
+Password: Clinic123!
+Muscat Skin & Aesthetics Clinic
+Email: muscat.skin.aesthetics.clinic@clinic.local
+Password: Clinic123!
+Royal Hospital
+Email: royal.hospital@clinic.local
+Password: Clinic123!
+Al Hayat Dental & Orthodontic Center
+Email: al.hayat.dental.orthodontic.center@clinic.local
+Password: Clinic123!
